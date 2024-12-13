@@ -8,11 +8,11 @@ from sklearn.tree import export_graphviz
 import pandas as pd
 
 # Load the training dataset
-train_file_path = '../train.csv'
+train_file_path = 'E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/train.csv'
 train_df = pd.read_csv(train_file_path)
 
 # Load the testing dataset
-test_file_path = '../test.csv'  # Update this path with your actual test file path if needed
+test_file_path = 'E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/test.csv'  # Update this path with your actual test file path if needed
 test_df = pd.read_csv(test_file_path)
 
 # Data preprocessing for training set
@@ -72,7 +72,7 @@ print(output)
 output.to_csv('titanic_predictions.csv', index=False)
 
 # Load the actual results from 'gender_submission.csv'
-actual_results_file_path = '../gender_submission.csv'  # Update this path if necessary
+actual_results_file_path = 'E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/gender_submission.csv'  # Update this path if necessary
 actual_results_df = pd.read_csv(actual_results_file_path)
 
 # Ensure that the 'PassengerId' is used to align predictions and actual results

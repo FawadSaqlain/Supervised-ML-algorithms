@@ -6,9 +6,9 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 # Load the datasets
-data = pd.read_csv('../train.csv')
-test_data = pd.read_csv('../test.csv')
-gender_submission = pd.read_csv('../gender_submission.csv')  # Load gender_submission.csv for actual test results
+data = pd.read_csv('E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/train.csv')
+test_data = pd.read_csv('E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/test.csv')
+gender_submission = pd.read_csv('E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/gender_submission.csv')  # Load gender_submission.csv for actual test results
 
 # Handle missing values in the training and test data
 data['Age'].fillna(data['Age'].median(), inplace=True)
@@ -21,13 +21,13 @@ test_data['Fare'].fillna(test_data['Fare'].median(), inplace=True)
 # Initialize LabelEncoder
 label_encoder = LabelEncoder()
 
-# Fit the encoder on the combined 'Sex' column to handle both train and test data
-combined_sex = pd.concat([data['Sex'], test_data['Sex']], axis=0)
-label_encoder.fit(combined_sex)
+# Fit the encoder on the combined 'gender' column to handle both train and test data
+combined_gender = pd.concat([data['gender'], test_data['gender']], axis=0)
+label_encoder.fit(combined_gender)
 
-# Transform the 'Sex' column for both datasets
-data['Sex'] = label_encoder.transform(data['Sex'])
-test_data['Sex'] = label_encoder.transform(test_data['Sex'])  # Same encoder
+# Transform the 'gender' column for both datasets
+data['gender'] = label_encoder.transform(data['gender'])
+test_data['gender'] = label_encoder.transform(test_data['gender'])  # Same encoder
 
 # Initialize LabelEncoder for 'Embarked' column with handle_unknown='ignore' for unseen labels
 embarked_encoder = LabelEncoder()

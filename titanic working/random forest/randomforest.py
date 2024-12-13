@@ -6,15 +6,15 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.tree import export_graphviz
 
 # Load the training dataset
-train_file_path = '../train.csv'
+train_file_path = 'E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/train.csv'
 train_data = pd.read_csv(train_file_path)
 
 # Load the testing dataset (without target column) and actual results
-test_file_path = '../test.csv'  # Replace with the correct path if needed
+test_file_path = 'E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/test.csv'  # Replace with the correct path if needed
 test_data = pd.read_csv(test_file_path)
 
 # Load the actual results for the test data
-gender_submission_file_path = '../gender_submission.csv'  # Replace with the correct path if needed
+gender_submission_file_path = 'E:/one drive/OneDrive - Happy English/course subjects/Machine Learning CSC354/project/Supervised-ML-algorithms/titanic working/gender_submission.csv'  # Replace with the correct path if needed
 actual_results = pd.read_csv(gender_submission_file_path)
 
 # Preprocess the training data
@@ -24,13 +24,13 @@ train_data['Embarked'].fillna(train_data['Embarked'].mode()[0], inplace=True)
 
 # Initialize and fit LabelEncoders for each column needing encoding
 label_encoders = {}
-for column in ['Sex', 'Cabin', 'Embarked', 'Name', 'Ticket']:
+for column in ['gender', 'Cabin', 'Embarked', 'Name', 'Ticket']:
     le = LabelEncoder()
     train_data[column] = le.fit_transform(train_data[column])
     label_encoders[column] = le
 
 # Select features and target variable for training
-X_train = train_data[['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
+X_train = train_data[['PassengerId', 'Pclass', 'Name', 'gender', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
 y_train = train_data['Survived']
 
 # Train the Random Forest Classifier
@@ -43,13 +43,13 @@ test_data['Cabin'].fillna('Unknown', inplace=True)
 test_data['Embarked'].fillna(test_data['Embarked'].mode()[0], inplace=True)
 
 # Transform the test data using the fitted LabelEncoders
-for column in ['Sex', 'Cabin', 'Embarked', 'Name', 'Ticket']:
+for column in ['gender', 'Cabin', 'Embarked', 'Name', 'Ticket']:
     if column in label_encoders:
         le = label_encoders[column]
         # Use .fit_transform on training and .transform on test, handling unseen labels safely
         test_data[column] = test_data[column].apply(lambda x: le.transform([x])[0] if x in le.classes_ else -1)
 
-X_test = test_data[['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
+X_test = test_data[['PassengerId', 'Pclass', 'Name', 'gender', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
 
 # Make predictions on the test data
 y_pred = rf_classifier.predict(X_test)
