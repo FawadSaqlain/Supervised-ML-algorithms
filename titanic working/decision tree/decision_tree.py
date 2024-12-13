@@ -25,13 +25,13 @@ train_df['Embarked'].fillna(train_df['Embarked'].mode()[0], inplace=True)
 # Drop 'Cabin' due to too many missing values
 train_df.drop('Cabin', axis=1, inplace=True)
 
-# Encode categorical variables ('Sex' and 'Embarked')
+# Encode categorical variables ('gender' and 'Embarked')
 label_encoder = LabelEncoder()
-train_df['Sex'] = label_encoder.fit_transform(train_df['Sex'])
+train_df['gender'] = label_encoder.fit_transform(train_df['gender'])
 train_df['Embarked'] = label_encoder.fit_transform(train_df['Embarked'])
 
 # Features and target for training
-features = ['PassengerId', 'Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
+features = ['PassengerId', 'Pclass', 'gender', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
 X_train = train_df[features]
 y_train = train_df['Survived']
 
@@ -50,7 +50,7 @@ test_df['Embarked'].fillna(train_df['Embarked'].mode()[0], inplace=True)
 test_df.drop('Cabin', axis=1, inplace=True)
 
 # Encode categorical variables in the test set
-test_df['Sex'] = label_encoder.fit_transform(test_df['Sex'])
+test_df['gender'] = label_encoder.fit_transform(test_df['gender'])
 test_df['Embarked'] = label_encoder.fit_transform(test_df['Embarked'])
 
 # Select features for the test set

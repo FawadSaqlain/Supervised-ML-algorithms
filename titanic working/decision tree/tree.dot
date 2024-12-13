@@ -1,7 +1,7 @@
 digraph Tree {
 node [shape=box, style="filled", color="black", fontname="helvetica"] ;
 edge [fontname="helvetica"] ;
-0 [label="Sex <= 0.5\ngini = 0.473\nsamples = 891\nvalue = [549, 342]\nclass = 0", fillcolor="#f5cfb4"] ;
+0 [label="gender <= 0.5\ngini = 0.473\nsamples = 891\nvalue = [549, 342]\nclass = 0", fillcolor="#f5cfb4"] ;
 1 [label="Pclass <= 2.5\ngini = 0.383\nsamples = 314\nvalue = [81.0, 233.0]\nclass = 1", fillcolor="#7ebfee"] ;
 0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
 2 [label="Age <= 2.5\ngini = 0.1\nsamples = 170\nvalue = [9, 161]\nclass = 1", fillcolor="#44a2e6"] ;
