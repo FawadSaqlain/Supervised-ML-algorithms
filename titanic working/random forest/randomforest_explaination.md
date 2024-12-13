@@ -49,17 +49,17 @@ train_data['Embarked'].fillna(train_data['Embarked'].mode()[0], inplace=True)
 ### 6. **Label Encoding for Categorical Variables**
 ```python
 label_encoders = {}
-for column in ['Sex', 'Cabin', 'Embarked', 'Name', 'Ticket']:
+for column in ['gender', 'Cabin', 'Embarked', 'Name', 'Ticket']:
     le = LabelEncoder()
     train_data[column] = le.fit_transform(train_data[column])
     label_encoders[column] = le
 ```
-- Categorical columns (`Sex`, `Cabin`, `Embarked`, `Name`, `Ticket`) are converted to numeric using `LabelEncoder`.
+- Categorical columns (`gender`, `Cabin`, `Embarked`, `Name`, `Ticket`) are converted to numeric using `LabelEncoder`.
 - A dictionary (`label_encoders`) stores the encoders for later use on the test data.
 
 ### 7. **Select Features and Target Variable for Training**
 ```python
-X_train = train_data[['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
+X_train = train_data[['PassengerId', 'Pclass', 'Name', 'gender', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
 y_train = train_data['Survived']
 ```
 - **`X_train`**: Features used to train the model.
@@ -83,7 +83,7 @@ test_data['Embarked'].fillna(test_data['Embarked'].mode()[0], inplace=True)
 
 ### 10. **Transform Test Data Using LabelEncoders**
 ```python
-for column in ['Sex', 'Cabin', 'Embarked', 'Name', 'Ticket']:
+for column in ['gender', 'Cabin', 'Embarked', 'Name', 'Ticket']:
     if column in label_encoders:
         le = label_encoders[column]
         test_data[column] = test_data[column].apply(lambda x: le.transform([x])[0] if x in le.classes_ else -1)
@@ -92,7 +92,7 @@ for column in ['Sex', 'Cabin', 'Embarked', 'Name', 'Ticket']:
 
 ### 11. **Select Features for Test Data**
 ```python
-X_test = test_data[['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
+X_test = test_data[['PassengerId', 'Pclass', 'Name', 'gender', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
 ```
 - **`X_test`** contains the features to be used for predictions.
 

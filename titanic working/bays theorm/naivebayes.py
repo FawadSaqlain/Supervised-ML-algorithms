@@ -24,10 +24,10 @@ test_data['Fare'].fillna(test_data['Fare'].median(), inplace=True)
 # Combine train and test data to fit LabelEncoder on all possible categories
 combined_data = pd.concat([train_data, test_data], axis=0, copy=True)
 
-# Fit LabelEncoder on combined data for 'Sex' and 'Embarked'
-label_encoder_sex = LabelEncoder()
+# Fit LabelEncoder on combined data for 'gender' and 'Embarked'
+label_encoder_gender = LabelEncoder()
 label_encoder_embarked = LabelEncoder()
-combined_data['Sex'] = label_encoder_sex.fit_transform(combined_data['Sex'])
+combined_data['gender'] = label_encoder_gender.fit_transform(combined_data['gender'])
 combined_data['Embarked'] = label_encoder_embarked.fit_transform(combined_data['Embarked'])
 
 # Split the data back into train and test sets

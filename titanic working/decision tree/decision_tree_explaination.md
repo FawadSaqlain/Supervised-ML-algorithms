@@ -50,17 +50,17 @@ train_df.drop('Cabin', axis=1, inplace=True)
 
 ```python
 label_encoder = LabelEncoder()
-train_df['Sex'] = label_encoder.fit_transform(train_df['Sex'])
+train_df['gender'] = label_encoder.fit_transform(train_df['gender'])
 train_df['Embarked'] = label_encoder.fit_transform(train_df['Embarked'])
 ```
 
 - `LabelEncoder`: Converts categorical string values into numerical values. This is necessary because machine learning algorithms typically work with numerical data.
-- `train_df['Sex']` and `train_df['Embarked']` are encoded to numeric values (0 or 1).
+- `train_df['gender']` and `train_df['Embarked']` are encoded to numeric values (0 or 1).
 
 ### 6. **Define Features and Target Variable for Training**
 
 ```python
-features = ['PassengerId', 'Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
+features = ['PassengerId', 'Pclass', 'gender', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
 X_train = train_df[features]
 y_train = train_df['Survived']
 ```
@@ -85,7 +85,7 @@ clf.fit(X_train, y_train)
 test_df['Age'].fillna(train_df['Age'].median(), inplace=True)
 test_df['Embarked'].fillna(train_df['Embarked'].mode()[0], inplace=True)
 test_df.drop('Cabin', axis=1, inplace=True)
-test_df['Sex'] = label_encoder.fit_transform(test_df['Sex'])
+test_df['gender'] = label_encoder.fit_transform(test_df['gender'])
 test_df['Embarked'] = label_encoder.fit_transform(test_df['Embarked'])
 ```
 
@@ -93,7 +93,7 @@ test_df['Embarked'] = label_encoder.fit_transform(test_df['Embarked'])
   - Missing values in 'Age' are filled with the median from the training set.
   - Missing values in 'Embarked' are filled with the mode from the training set.
   - The 'Cabin' column is dropped.
-  - Categorical columns ('Sex' and 'Embarked') are encoded using the same `LabelEncoder` used for the training set to maintain consistency.
+  - Categorical columns ('gender' and 'Embarked') are encoded using the same `LabelEncoder` used for the training set to maintain consistency.
 
 ### 9. **Select Features for the Test Set**
 

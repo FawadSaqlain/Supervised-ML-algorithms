@@ -44,15 +44,15 @@ test_data['Fare'].fillna(test_data['Fare'].median(), inplace=True)
 ```python
 combined_data = pd.concat([train_data, test_data], axis=0, copy=True)
 
-label_encoder_sex = LabelEncoder()
+label_encoder_gender = LabelEncoder()
 label_encoder_embarked = LabelEncoder()
 
-combined_data['Sex'] = label_encoder_sex.fit_transform(combined_data['Sex'])
+combined_data['gender'] = label_encoder_gender.fit_transform(combined_data['gender'])
 combined_data['Embarked'] = label_encoder_embarked.fit_transform(combined_data['Embarked'])
 ```
 - **Combining Data**: Combines training and test datasets to apply `LabelEncoder` on both sets, ensuring consistency in encoding.
 - **Label Encoding**:
-  - **`label_encoder_sex`** converts categorical values like "male" and "female" to numerical (e.g., 0 and 1).
+  - **`label_encoder_gender`** converts categorical values like "male" and "female" to numerical (e.g., 0 and 1).
   - **`label_encoder_embarked`** converts "C", "Q", "S" to numerical values.
 
 ### 5. **Split Combined Data Back into Train and Test Sets**

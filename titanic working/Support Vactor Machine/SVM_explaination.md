@@ -44,13 +44,13 @@ test_data['Fare'].fillna(test_data['Fare'].median(), inplace=True)
 ```python
 label_encoder = LabelEncoder()
 
-combined_sex = pd.concat([data['Sex'], test_data['Sex']], axis=0)
-label_encoder.fit(combined_sex)
+combined_gender = pd.concat([data['gender'], test_data['gender']], axis=0)
+label_encoder.fit(combined_gender)
 
-data['Sex'] = label_encoder.transform(data['Sex'])
-test_data['Sex'] = label_encoder.transform(test_data['Sex'])
+data['gender'] = label_encoder.transform(data['gender'])
+test_data['gender'] = label_encoder.transform(test_data['gender'])
 ```
-- **Label Encoding for `Sex`**:
+- **Label Encoding for `gender`**:
   - `LabelEncoder` converts categorical data (`'male'`, `'female'`) into numerical format (e.g., `0` and `1`).
   - `fit` on the combined data ensures consistent encoding across training and test sets.
   - `transform` applies the transformation to each DataFrame.
@@ -63,7 +63,7 @@ embarked_encoder.fit(data['Embarked'].dropna())
 data['Embarked'] = embarked_encoder.transform(data['Embarked'])
 test_data['Embarked'] = embarked_encoder.transform(test_data['Embarked'])
 ```
-- The `Embarked` column, which indicates the port of embarkation, is also encoded similarly to `Sex` using `LabelEncoder`.
+- The `Embarked` column, which indicates the port of embarkation, is also encoded similarly to `gender` using `LabelEncoder`.
 - Fitting is done only on non-null values from the training set to avoid issues with missing values.
 
 ### 6. **Feature Selection**
